@@ -4,7 +4,7 @@ import IBKR from '../src/brokers/ibkr.js';
 
 const SHORT_LEN = 14;
 const LONG_LEN = SHORT_LEN * 2;
-const MAX_POS_PER_STOCK = 50_000; // Maximum position size per stock
+const MAX_POS_PER_STOCK = 50_000;
 
 const sma = candles => candles.reduce((sum, c) => sum + c.close, 0) / candles.length;
 

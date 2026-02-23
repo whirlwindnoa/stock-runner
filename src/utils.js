@@ -15,10 +15,16 @@ export function percentageDifference(original, updated) {
 }
 
 export function formatDate(date) {
-    const weekDay = date.toLocaleDateString('en-US', { weekday: 'short', timeZone: "UTC" });
-    const month = date.toLocaleDateString('en-US', { month: 'short', timeZone: "UTC" });
-    const day = date.toLocaleDateString('en-US', { day: 'numeric', timeZone: "UTC" });
-    return `${month} ${day.padStart(2, '0')} ${weekDay} ${date.toISOString().split(':').slice(0, 2).join(':').split('T').join(' ')}`;
+    const d = date instanceof Date ? date : new Date(date);
+
+    if (isNaN(d.getTime())) {
+        return 'Invalid Date';
+    }
+
+    const weekDay = d.toLocaleDateString('en-US', { weekday: 'short', timeZone: "UTC" });
+    const month = d.toLocaleDateString('en-US', { month: 'short', timeZone: "UTC" });
+    const day = d.toLocaleDateString('en-US', { day: 'numeric', timeZone: "UTC" });
+    return `${month} ${day.padStart(2, '0')} ${weekDay} ${d.toISOString().split(':').slice(0, 2).join(':').split('T').join(' ')}`;
 }
 
 export function splitArray(arr, size) {

@@ -125,16 +125,16 @@ async function processMarket(folderPath) {
     }
 }
 
-const markets = fs.readdirSync(`./data/stooq/`);
+const markets = fs.readdirSync(`./data/stooq/5m`);
 for(const market of markets) {
     if(!market.endsWith(' stocks')) continue;
     console.log(`Processing ${market}`);
-    const files = fs.readdirSync(`./data/stooq/${market}`);
+    const files = fs.readdirSync(`./data/stooq/5m/${market}`);
     if(files.includes('1')) {
         for(const folder of files) {
-            await processMarket(`./data/stooq/${market}/${folder}`);
+            await processMarket(`./data/stooq/5m/${market}/${folder}`);
         }
     } else {
-        await processMarket(`./data/stooq/${market}`);
+        await processMarket(`./data/stooq/5m/${market}`);
     }
 }

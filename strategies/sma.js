@@ -9,11 +9,11 @@ const sma = candles => candles.reduce((sum, c) => sum + c.close, 0) / candles.le
 
 const smaCrossover = new Strategy({
     intervals: {
-        '1d': { count: LONG_LEN, main: true },
+        '5m': { count: LONG_LEN, main: true },
     },
     onTick: async ({ candle, getCandles, buy, sell, stockBalance }) => {
-        const lastLong = getCandles('1d', LONG_LEN);
-        const lastShort = getCandles('1d', SHORT_LEN);
+        const lastLong = getCandles('5m', LONG_LEN);
+        const lastShort = getCandles('5m', SHORT_LEN);
 
         const longMA = sma(lastLong);
         const shortMA = sma(lastShort);
@@ -31,7 +31,7 @@ const smaCrossover = new Strategy({
 const bt = new Backtest({
     strategy: smaCrossover,
     startDate: new Date('2020-07-14'),
-    endDate: new Date('2025-07-30'),
+    endDate: new Date('2021-07-30'),
     startCashBalance: 10_000,
     broker: new IBKR('tiered'),
     logs: {
